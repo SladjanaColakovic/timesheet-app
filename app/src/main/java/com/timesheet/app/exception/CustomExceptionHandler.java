@@ -27,4 +27,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<?> employeeNotFoundException(){
         return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ProjectNotFoundException.class)
+    public ResponseEntity<?> projectNotFoundException(){
+        return new ResponseEntity<>("Project not found", HttpStatus.NOT_FOUND);
+    }
 }
