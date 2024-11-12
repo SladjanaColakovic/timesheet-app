@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/timesheet")
+@RequestMapping("/api/timesheetItem")
 public class TimesheetItemController {
 
     @Autowired
@@ -30,13 +30,6 @@ public class TimesheetItemController {
         TimesheetItem mappedItem = mapper.map(newTimesheetItem, TimesheetItem.class);
         TimesheetItem result = service.create(mappedItem);
         return new ResponseEntity<>(mapper.map(result, TimesheetItemDto.class), HttpStatus.CREATED);
-    }
-
-    @GetMapping
-    public ResponseEntity<?> getEmployeeTimesheetItemsForDate(@RequestParam(name = "employeeId") Long employeeId,
-                                                              @RequestParam(name = "date")LocalDate date){
-        DailyTimesheetItems result = service.getEmployeeTimesheetItemsForDate(employeeId, date);
-        return new ResponseEntity<>(mapper.map(result, DailyTimesheetItemsDto.class), HttpStatus.OK);
     }
 
 

@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface TimesheetItemService {
     TimesheetItem create(TimesheetItem timesheetItem);
-    DailyTimesheetItems getEmployeeTimesheetItemsForDate(Long employeeId, LocalDate date);
 }

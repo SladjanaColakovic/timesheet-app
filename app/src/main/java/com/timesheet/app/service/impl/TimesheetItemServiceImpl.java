@@ -20,11 +20,4 @@ public class TimesheetItemServiceImpl implements TimesheetItemService {
     public TimesheetItem create(TimesheetItem timesheetItem) {
         return repository.save(timesheetItem);
     }
-
-    @Override
-    public DailyTimesheetItems getEmployeeTimesheetItemsForDate(Long employeeId, LocalDate date) {
-        List<TimesheetItem> items = repository.findByEmployeeIdAndDate(employeeId, date);
-        double totalHours = items.stream().mapToDouble(item -> item.getHours() + item.getOvertime()).sum();
-        return new DailyTimesheetItems(items, totalHours);
-    }
 }
