@@ -18,4 +18,5 @@ public class TimesheetItemDto {
     private ClientDto client;
     private ProjectDto project;
     private CategoryDto category;
+    private EmployeeDto employee;
 }

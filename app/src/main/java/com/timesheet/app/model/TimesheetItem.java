@@ -30,4 +30,7 @@ public class TimesheetItem {
     @ManyToOne
     private Category category;
 
+    @ManyToOne
+    private Employee employee;
+
 }
