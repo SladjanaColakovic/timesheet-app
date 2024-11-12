@@ -21,6 +21,8 @@ public class Client {
     private String city;
     private String postalCode;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Country country;
+
+    private boolean deleted = false;
 }

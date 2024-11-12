@@ -22,17 +22,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAll() {
-        return repository.findAll();
+        return repository.findByDeletedFalse();
     }
 
     @Override
     public Project getById(Long id) {
-        return repository.findById(id).orElseThrow(ProjectNotFoundException::new);
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(ProjectNotFoundException::new);
     }
 
     @Override
     public Project update(Project project) {
-        Project existingProject = repository.findById(project.getId()).orElseThrow(ProjectNotFoundException::new);
+        Project existingProject = repository.findByIdAndDeletedFalse(project.getId()).orElseThrow(ProjectNotFoundException::new);
         existingProject.setName(project.getName());
         existingProject.setDescription(project.getDescription());
         existingProject.setStatus(project.getStatus());
@@ -43,6 +43,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        Project project = repository.findByIdAndDeletedFalse(id).orElseThrow(ProjectNotFoundException::new);
+        project.setDeleted(true);
+        repository.save(project);
     }
 }

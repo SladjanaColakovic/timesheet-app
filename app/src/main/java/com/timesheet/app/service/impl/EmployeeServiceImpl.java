@@ -22,17 +22,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAll() {
-        return repository.findAll();
+        return repository.findByDeletedFalse();
     }
 
     @Override
     public Employee getById(Long id) {
-        return repository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
     public Employee update(Employee employee) {
-        Employee existingEmployee = repository.findById(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
+        Employee existingEmployee = repository.findByIdAndDeletedFalse(employee.getId()).orElseThrow(EmployeeNotFoundException::new);
         existingEmployee.setName(employee.getName());
         existingEmployee.setUsername(employee.getUsername());
         existingEmployee.setEmail(employee.getEmail());
@@ -44,6 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        Employee employee = repository.findByIdAndDeletedFalse(id).orElseThrow(EmployeeNotFoundException::new);
+        employee.setDeleted(true);
+        repository.save(employee);
     }
 }

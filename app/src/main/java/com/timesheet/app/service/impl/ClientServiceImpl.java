@@ -22,17 +22,17 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> getAll() {
-        return repository.findAll();
+        return repository.findByDeletedFalse();
     }
 
     @Override
     public Client getById(Long id) {
-        return repository.findById(id).orElseThrow(ClientNotFoundException::new);
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(ClientNotFoundException::new);
     }
 
     @Override
     public Client update(Client client) {
-        Client existingClient = repository.findById(client.getId()).orElseThrow(ClientNotFoundException::new);
+        Client existingClient = repository.findByIdAndDeletedFalse(client.getId()).orElseThrow(ClientNotFoundException::new);
         existingClient.setName(client.getName());
         existingClient.setAddress(client.getAddress());
         existingClient.setCity(client.getCity());
@@ -43,6 +43,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        Client client = repository.findByIdAndDeletedFalse(id).orElseThrow(ClientNotFoundException::new);
+        client.setDeleted(true);
+        repository.save(client);
     }
 }

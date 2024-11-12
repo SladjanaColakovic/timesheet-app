@@ -22,23 +22,25 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAll() {
-        return repository.findAll();
+        return repository.findByDeletedFalse();
     }
 
     @Override
     public Category getById(Long id) {
-        return repository.findById(id).orElseThrow(CategoryNotFoundException::new);
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(CategoryNotFoundException::new);
     }
 
     @Override
     public Category update(Category category) {
-        Category existingCategory = repository.findById(category.getId()).orElseThrow(CategoryNotFoundException::new);
+        Category existingCategory = repository.findByIdAndDeletedFalse(category.getId()).orElseThrow(CategoryNotFoundException::new);
         existingCategory.setName(category.getName());
         return repository.save(existingCategory);
     }
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        Category category = repository.findByIdAndDeletedFalse(id).orElseThrow(CategoryNotFoundException::new);
+        category.setDeleted(true);
+        repository.save(category);
     }
 }
