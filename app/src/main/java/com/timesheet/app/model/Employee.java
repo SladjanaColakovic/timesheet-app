@@ -33,6 +33,8 @@ public class Employee {
     private EmployeeStatus status;
     private Role role;
 
+    private boolean deleted = false;
+
 
 
 }

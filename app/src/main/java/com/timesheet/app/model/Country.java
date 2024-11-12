@@ -16,4 +16,6 @@ public class Country {
 
     @Column(unique = true, nullable = false)
     private String name;
+
+    private boolean deleted = false;
 }

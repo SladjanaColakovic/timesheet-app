@@ -22,23 +22,25 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<Country> getAll() {
-        return repository.findAll();
+        return repository.findByDeletedFalse();
     }
 
     @Override
     public Country getById(Long id) {
-        return repository.findById(id).orElseThrow(CountryNotFoundException::new);
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(CountryNotFoundException::new);
     }
 
     @Override
     public Country update(Country country) {
-        Country existingCountry = repository.findById(country.getId()).orElseThrow(CountryNotFoundException::new);
+        Country existingCountry = repository.findByIdAndDeletedFalse(country.getId()).orElseThrow(CountryNotFoundException::new);
         existingCountry.setName(country.getName());
         return repository.save(existingCountry);
     }
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        Country country = repository.findByIdAndDeletedFalse(id).orElseThrow(CountryNotFoundException::new);
+        country.setDeleted(true);
+        repository.save(country);
     }
 }

@@ -24,6 +24,8 @@ public class Project {
     @ManyToOne
     private Client client;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Employee lead;
+
+    private boolean deleted = false;
 }
