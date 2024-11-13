@@ -1,5 +1,7 @@
 package com.timesheet.app.repository;
 
+import com.timesheet.app.helper.MonthlyTimesheetItem;
+import com.timesheet.app.helper.MonthlyTimesheetParams;
 import com.timesheet.app.helper.ReportItem;
 import com.timesheet.app.helper.ReportSearchParams;
 import com.timesheet.app.model.TimesheetItem;
@@ -23,4 +25,13 @@ public interface TimesheetItemRepository extends JpaRepository<TimesheetItem, Lo
             "(:#{#reportParams.categoryId} IS null OR :#{#reportParams.categoryId} = i.category.id)" +
             "GROUP BY i.date, i.employee, i.project, i.client, i.category, i.description")
     List<ReportItem> getTimesheetReport(ReportSearchParams reportParams);
+
+    @Query("SELECT new com.timesheet.app.helper.MonthlyTimesheetItem(i.date, sum(i.hours + i.overtime)) " +
+            "FROM TimesheetItem i " +
+            "WHERE i.employee.id = :#{#timesheetParams.employeeId} AND " +
+            "i.date >= :#{#timesheetParams.from} AND " +
+            "i.date <= :#{#timesheetParams.to} " +
+            "GROUP BY i.date")
+    List<MonthlyTimesheetItem> findEmployeeItemsForDateRange(MonthlyTimesheetParams timesheetParams);
+
 }

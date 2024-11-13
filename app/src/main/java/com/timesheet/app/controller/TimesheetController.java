@@ -1,7 +1,10 @@
 package com.timesheet.app.controller;
 
 import com.timesheet.app.dto.timesheet.DailyTimesheetItemsDto;
+import com.timesheet.app.dto.timesheet.TimesheetDto;
 import com.timesheet.app.helper.DailyTimesheetItems;
+import com.timesheet.app.helper.MonthlyTimesheetRequest;
+import com.timesheet.app.helper.Timesheet;
 import com.timesheet.app.service.TimesheetService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +27,19 @@ public class TimesheetController {
     @Autowired
     private ModelMapper mapper;
 
-    @GetMapping
+    @GetMapping("/daily")
     public ResponseEntity<?> getEmployeeTimesheetItemsForDate(@RequestParam(name = "employeeId") Long employeeId,
                                                               @RequestParam(name = "date") LocalDate date){
         DailyTimesheetItems result = service.getEmployeeTimesheetItemsForDate(employeeId, date);
         return new ResponseEntity<>(mapper.map(result, DailyTimesheetItemsDto.class), HttpStatus.OK);
+    }
+
+    @GetMapping("/monthly")
+    public ResponseEntity<?> createEmployeeMonthlyTimesheet(@RequestParam(name = "employeeId") Long employeeId,
+                                                            @RequestParam(name = "year") int year,
+                                                            @RequestParam(name = "month") int month){
+        Timesheet result = service.createEmployeeMonthlyTimesheet(new MonthlyTimesheetRequest(year, month, employeeId));
+        return new ResponseEntity<>(mapper.map(result, TimesheetDto.class), HttpStatus.OK);
+
     }
 }
