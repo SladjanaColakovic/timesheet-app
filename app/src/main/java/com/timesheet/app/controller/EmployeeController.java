@@ -1,8 +1,8 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.EmployeeDto;
-import com.timesheet.app.dto.NewEmployeeDto;
-import com.timesheet.app.dto.UpdateEmployeeDto;
+import com.timesheet.app.dto.employee.EmployeeDto;
+import com.timesheet.app.dto.employee.NewEmployeeDto;
+import com.timesheet.app.dto.employee.UpdateEmployeeDto;
 import com.timesheet.app.model.Employee;
 import com.timesheet.app.service.EmployeeService;
 import org.modelmapper.ModelMapper;

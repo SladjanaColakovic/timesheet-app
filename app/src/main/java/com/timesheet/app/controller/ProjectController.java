@@ -1,8 +1,8 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.NewProjectDto;
-import com.timesheet.app.dto.ProjectDto;
-import com.timesheet.app.dto.UpdateProjectDto;
+import com.timesheet.app.dto.project.NewProjectDto;
+import com.timesheet.app.dto.project.ProjectDto;
+import com.timesheet.app.dto.project.UpdateProjectDto;
 import com.timesheet.app.model.Project;
 import com.timesheet.app.service.ProjectService;
 import org.modelmapper.ModelMapper;

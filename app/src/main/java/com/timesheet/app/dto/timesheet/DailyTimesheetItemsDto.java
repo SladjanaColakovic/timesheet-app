@@ -1,4 +1,4 @@
-package com.timesheet.app.dto;
+package com.timesheet.app.dto.timesheet;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

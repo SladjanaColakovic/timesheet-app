@@ -1,9 +1,7 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.DailyTimesheetItemsDto;
-import com.timesheet.app.dto.NewTimesheetItemDto;
-import com.timesheet.app.dto.TimesheetItemDto;
-import com.timesheet.app.helper.DailyTimesheetItems;
+import com.timesheet.app.dto.timesheet.NewTimesheetItemDto;
+import com.timesheet.app.dto.timesheet.TimesheetItemDto;
 import com.timesheet.app.model.TimesheetItem;
 import com.timesheet.app.service.TimesheetItemService;
 import org.modelmapper.ModelMapper;
@@ -11,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/timesheetItem")

@@ -1,8 +1,8 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.CategoryDto;
-import com.timesheet.app.dto.NewCategoryDto;
-import com.timesheet.app.dto.UpdateCategoryDto;
+import com.timesheet.app.dto.category.CategoryDto;
+import com.timesheet.app.dto.category.NewCategoryDto;
+import com.timesheet.app.dto.category.UpdateCategoryDto;
 import com.timesheet.app.model.Category;
 import com.timesheet.app.service.CategoryService;
 import org.modelmapper.ModelMapper;
