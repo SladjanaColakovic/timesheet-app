@@ -1,6 +1,6 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.DailyTimesheetItemsDto;
+import com.timesheet.app.dto.timesheet.DailyTimesheetItemsDto;
 import com.timesheet.app.helper.DailyTimesheetItems;
 import com.timesheet.app.service.TimesheetService;
 import org.modelmapper.ModelMapper;

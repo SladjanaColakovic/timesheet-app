@@ -1,8 +1,8 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.ClientDto;
-import com.timesheet.app.dto.NewClientDto;
-import com.timesheet.app.dto.UpdateClientDto;
+import com.timesheet.app.dto.client.ClientDto;
+import com.timesheet.app.dto.client.NewClientDto;
+import com.timesheet.app.dto.client.UpdateClientDto;
 import com.timesheet.app.model.Client;
 import com.timesheet.app.service.ClientService;
 import org.modelmapper.ModelMapper;

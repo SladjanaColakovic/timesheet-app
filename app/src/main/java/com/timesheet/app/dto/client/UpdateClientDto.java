@@ -1,5 +1,6 @@
-package com.timesheet.app.dto;
+package com.timesheet.app.dto.client;
 
+import com.timesheet.app.dto.country.CountryDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

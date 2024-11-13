@@ -1,4 +1,4 @@
-package com.timesheet.app.dto;
+package com.timesheet.app.dto.employee;
 
 import com.timesheet.app.enums.EmployeeStatus;
 import com.timesheet.app.enums.Role;

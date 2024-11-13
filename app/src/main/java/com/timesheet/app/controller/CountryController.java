@@ -1,8 +1,8 @@
 package com.timesheet.app.controller;
 
-import com.timesheet.app.dto.CountryDto;
-import com.timesheet.app.dto.NewCountryDto;
-import com.timesheet.app.dto.UpdateCountryDto;
+import com.timesheet.app.dto.country.CountryDto;
+import com.timesheet.app.dto.country.NewCountryDto;
+import com.timesheet.app.dto.country.UpdateCountryDto;
 import com.timesheet.app.model.Country;
 import com.timesheet.app.service.CountryService;
 import org.modelmapper.ModelMapper;
