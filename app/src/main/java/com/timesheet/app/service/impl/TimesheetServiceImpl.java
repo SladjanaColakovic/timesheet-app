@@ -43,8 +43,8 @@ public class TimesheetServiceImpl implements TimesheetService {
 
         List<MonthlyTimesheetItem> items = new ArrayList<>();
         Map<LocalDate, MonthlyTimesheetItem> existingItems = loadTimesheetItemsByDateRange(new MonthlyTimesheetParams(from, to, timesheetRequest.getEmployeeId()));
-        for(LocalDate date = from; !date.isAfter(to);  date = date.plusDays(1)){
-            MonthlyTimesheetItem item = existingItems.getOrDefault(date, new MonthlyTimesheetItem(date, 0.0, Flag.Blank));
+        for(LocalDate date = from; !date.isAfter(to);  date = date.plusDays(TimesheetConstants.DAY_INCREMENT)){
+            MonthlyTimesheetItem item = existingItems.getOrDefault(date, new MonthlyTimesheetItem(date, TimesheetConstants.INITIAL_HOURS, Flag.Blank));
 
             if(existingItems.containsKey(date)){
                 item.updateFlagBasedOnHours();
