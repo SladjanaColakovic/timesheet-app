@@ -36,11 +36,8 @@ public class SecurityConfig {
     @Autowired
     private ForbiddenRequestHandler forbiddenRequestHandler;
 
-    @Bean
-    @Primary
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
-    }
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -55,7 +52,7 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -77,7 +74,7 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(unauthorizedRequestHandler)
                         .accessDeniedHandler(forbiddenRequestHandler))
-                .addFilterBefore(new JwtAuthenticationFilter(userDetailsService(), tokenUtils), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(userDetailsService, tokenUtils), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
