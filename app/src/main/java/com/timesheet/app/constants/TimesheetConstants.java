@@ -1,4 +1,4 @@
-package com.timesheet.app.helper;
+package com.timesheet.app.constants;
 
 public class TimesheetConstants {
     public static double INITIAL_HOURS = 0.0;

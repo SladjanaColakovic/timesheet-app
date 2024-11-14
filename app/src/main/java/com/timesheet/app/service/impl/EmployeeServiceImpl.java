@@ -38,7 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setEmail(employee.getEmail());
         existingEmployee.setHoursPerWeek(employee.getHoursPerWeek());
         existingEmployee.setStatus(employee.getStatus());
-        existingEmployee.setRole(employee.getRole());
         return repository.save(existingEmployee);
     }
 

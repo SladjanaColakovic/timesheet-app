@@ -1,11 +1,12 @@
 package com.timesheet.app.model;
 
 import com.timesheet.app.enums.EmployeeStatus;
-import com.timesheet.app.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -31,9 +32,15 @@ public class Employee {
     private String password;
 
     private EmployeeStatus status;
-    private Role role;
 
     private boolean deleted = false;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "employees_roles",
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles;
 
 
 

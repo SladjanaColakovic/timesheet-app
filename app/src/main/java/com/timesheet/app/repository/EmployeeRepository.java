@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByDeletedFalse();
     Optional<Employee> findByIdAndDeletedFalse(Long id);
+    Optional<Employee> findByUsernameAndDeletedFalse(String username);
 }

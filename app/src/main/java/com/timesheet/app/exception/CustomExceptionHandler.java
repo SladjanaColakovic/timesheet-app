@@ -32,4 +32,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<?> projectNotFoundException(){
         return new ResponseEntity<>("Project not found", HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DuplicateUsernameException.class)
+    public ResponseEntity<?> duplicateUsernameException(){
+        return new ResponseEntity<>("The username is already in use. Please try a different one.", HttpStatus.BAD_REQUEST);
+    }
 }

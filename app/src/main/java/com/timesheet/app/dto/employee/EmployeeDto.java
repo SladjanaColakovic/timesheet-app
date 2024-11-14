@@ -1,10 +1,11 @@
 package com.timesheet.app.dto.employee;
 
 import com.timesheet.app.enums.EmployeeStatus;
-import com.timesheet.app.enums.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -17,5 +18,5 @@ public class EmployeeDto {
     private double hoursPerWeek;
     private String password;
     private EmployeeStatus status;
-    private Role role;
+    private Set<RoleDto> roles;
 }
