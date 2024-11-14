@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ public class TimesheetController {
     private ModelMapper mapper;
 
     @GetMapping("/daily")
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getEmployeeTimesheetItemsForDate(@RequestParam(name = "employeeId") Long employeeId,
                                                               @RequestParam(name = "date") LocalDate date){
         DailyTimesheetItems result = service.getEmployeeTimesheetItemsForDate(employeeId, date);
@@ -35,6 +37,7 @@ public class TimesheetController {
     }
 
     @GetMapping("/monthly")
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> createEmployeeMonthlyTimesheet(@RequestParam(name = "employeeId") Long employeeId,
                                                             @RequestParam(name = "year") int year,
                                                             @RequestParam(name = "month") int month){

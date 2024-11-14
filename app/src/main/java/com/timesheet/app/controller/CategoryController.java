@@ -25,6 +25,7 @@ public class CategoryController {
     private ModelMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewCategoryDto newCategory){
         Category mappedCategory = mapper.map(newCategory, Category.class);
         Category result = service.create(mappedCategory);
@@ -32,7 +33,6 @@ public class CategoryController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){
         List<Category> result = service.getAll();
         return new ResponseEntity<>(
@@ -42,13 +42,13 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Category result = service.getById(id);
         return new ResponseEntity<>(mapper.map(result, CategoryDto.class), HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody UpdateCategoryDto category){
         Category mappedCategory = mapper.map(category, Category.class);
         Category result = service.update(mappedCategory);
@@ -56,6 +56,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The category has been deleted", HttpStatus.OK);

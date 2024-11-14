@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class CountryController {
     private ModelMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewCountryDto newCountry){
         Country mappedCountry = mapper.map(newCountry, Country.class);
         Country result = service.create(mappedCountry);
@@ -46,6 +48,7 @@ public class CountryController {
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody UpdateCountryDto country){
         Country mappedCountry = mapper.map(country, Country.class);
         Country result = service.update(mappedCountry);
@@ -53,6 +56,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The country has been deleted", HttpStatus.OK);
