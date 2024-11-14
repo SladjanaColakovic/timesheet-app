@@ -1,6 +1,6 @@
 package com.timesheet.app.security.filter;
 
-import com.timesheet.app.security.service.CustomUserDetailsService;
+import com.timesheet.app.constants.AuthConstants;
 import com.timesheet.app.security.token.TokenUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String bearerToken = request.getHeader("Authorization");
 
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(AuthConstants.BEARER_PREFIX_LENGTH, bearerToken.length());
         }
         return null;
     }

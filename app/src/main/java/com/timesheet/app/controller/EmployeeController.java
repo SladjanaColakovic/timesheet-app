@@ -24,14 +24,6 @@ public class EmployeeController {
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> create(@RequestBody NewEmployeeDto newEmployee){
-        Employee mappedEmployee = mapper.map(newEmployee, Employee.class);
-        Employee result = service.create(mappedEmployee);
-        return new ResponseEntity<>(mapper.map(result, EmployeeDto.class), HttpStatus.CREATED);
-    }
-
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){

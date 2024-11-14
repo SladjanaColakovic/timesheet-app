@@ -1,8 +1,6 @@
 package com.timesheet.app.security.token;
 
 import com.timesheet.app.constants.AuthConstants;
-import com.timesheet.app.model.Employee;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

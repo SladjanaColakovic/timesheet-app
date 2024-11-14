@@ -36,9 +36,6 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
     @Override
     public String login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

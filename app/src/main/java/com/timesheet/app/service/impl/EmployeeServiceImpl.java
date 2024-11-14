@@ -16,11 +16,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository repository;
 
     @Override
-    public Employee create(Employee employee) {
-        return repository.save(employee);
-    }
-
-    @Override
     public List<Employee> getAll() {
         return repository.findByDeletedFalse();
     }
