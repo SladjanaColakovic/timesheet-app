@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ClientController {
     private ModelMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewClientDto newClient){
         Client mappedClient = mapper.map(newClient, Client.class);
         Client result = service.create(mappedClient);
@@ -31,6 +33,7 @@ public class ClientController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){
         List<Client> result = service.getAll();
         return new ResponseEntity<>(
@@ -40,12 +43,14 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Client result = service.getById(id);
         return new ResponseEntity<>(mapper.map(result, ClientDto.class), HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody UpdateClientDto client){
         Client mappedClient = mapper.map(client, Client.class);
         Client result = service.update(mappedClient);
@@ -53,6 +58,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The client has been deleted", HttpStatus.OK);

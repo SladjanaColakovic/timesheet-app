@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class TimesheetItemController {
     private ModelMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> create(@RequestBody NewTimesheetItemDto newTimesheetItem){
         TimesheetItem mappedItem = mapper.map(newTimesheetItem, TimesheetItem.class);
         TimesheetItem result = service.create(mappedItem);

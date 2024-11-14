@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,14 +24,8 @@ public class EmployeeController {
     @Autowired
     private ModelMapper mapper;
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody NewEmployeeDto newEmployee){
-        Employee mappedEmployee = mapper.map(newEmployee, Employee.class);
-        Employee result = service.create(mappedEmployee);
-        return new ResponseEntity<>(mapper.map(result, EmployeeDto.class), HttpStatus.CREATED);
-    }
-
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll(){
         List<Employee> result = service.getAll();
         return new ResponseEntity<>(
@@ -40,12 +35,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Employee result = service.getById(id);
         return new ResponseEntity<>(mapper.map(result, EmployeeDto.class), HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody UpdateEmployeeDto employee){
         Employee mappedEmployee = mapper.map(employee, Employee.class);
         Employee result = service.update(mappedEmployee);
@@ -53,6 +50,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The employee has been deleted", HttpStatus.OK);

@@ -16,11 +16,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository repository;
 
     @Override
-    public Employee create(Employee employee) {
-        return repository.save(employee);
-    }
-
-    @Override
     public List<Employee> getAll() {
         return repository.findByDeletedFalse();
     }
@@ -38,7 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setEmail(employee.getEmail());
         existingEmployee.setHoursPerWeek(employee.getHoursPerWeek());
         existingEmployee.setStatus(employee.getStatus());
-        existingEmployee.setRole(employee.getRole());
         return repository.save(existingEmployee);
     }
 

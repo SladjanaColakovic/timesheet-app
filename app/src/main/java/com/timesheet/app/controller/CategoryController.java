@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class CategoryController {
     private ModelMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewCategoryDto newCategory){
         Category mappedCategory = mapper.map(newCategory, Category.class);
         Category result = service.create(mappedCategory);
@@ -46,6 +48,7 @@ public class CategoryController {
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody UpdateCategoryDto category){
         Category mappedCategory = mapper.map(category, Category.class);
         Category result = service.update(mappedCategory);
@@ -53,6 +56,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The category has been deleted", HttpStatus.OK);
