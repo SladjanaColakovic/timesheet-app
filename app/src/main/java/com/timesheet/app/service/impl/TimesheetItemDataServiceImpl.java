@@ -45,7 +45,7 @@ public class TimesheetItemDataServiceImpl implements TimesheetItemDataService {
         List<Project> workingProjects = employee.getProjects();
         List<Project> leadingProjects = projectRepository.findByLeadIdAndDeletedFalse(employeeId);
         workingProjects.addAll(leadingProjects);
-        return workingProjects.stream().filter(project -> project.getClient().getId().equals(client.getId())).collect(Collectors.toList());
+        return workingProjects.stream().filter(project -> project.getClient().getId().equals(client.getId())).distinct().collect(Collectors.toList());
     }
 
     @Override
