@@ -1,7 +1,6 @@
 package com.timesheet.app.controller;
 
 import com.timesheet.app.dto.employee.EmployeeDto;
-import com.timesheet.app.dto.employee.NewEmployeeDto;
 import com.timesheet.app.dto.employee.UpdateEmployeeDto;
 import com.timesheet.app.model.Employee;
 import com.timesheet.app.service.EmployeeService;

@@ -4,7 +4,6 @@ import com.timesheet.app.dto.auth.LoginRequest;
 import com.timesheet.app.exception.DuplicateUsernameException;
 import com.timesheet.app.model.Employee;
 import com.timesheet.app.repository.EmployeeRepository;
-import com.timesheet.app.repository.RoleRepository;
 import com.timesheet.app.security.service.CustomUserDetailsService;
 import com.timesheet.app.security.token.TokenUtils;
 import com.timesheet.app.service.AuthService;
