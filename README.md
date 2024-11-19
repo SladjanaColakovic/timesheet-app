@@ -32,8 +32,8 @@ Follow these steps to run the application locally using Docker Compose.
     This project uses Docker and Docker Compose for containerization.   
 
     Use the following command to rebuild the images and start the containers:    
-    
-    docker-compose up --build   
+
+        docker-compose up --build   
 
     **Starting Containers if They Already Exist**   
     
