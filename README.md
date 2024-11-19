@@ -26,7 +26,7 @@ Before running this application, make sure you have the following installed on y
 Follow these steps to run the application locally using Docker Compose.
 1. Clone the repository  
 
-    https://github.com/SladjanaColakovic/timesheet-app.git
+        git clone https://github.com/SladjanaColakovic/timesheet-app.git
 2. Dockerize the application   
 
     This project uses Docker and Docker Compose for containerization.   
