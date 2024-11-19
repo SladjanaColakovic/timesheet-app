@@ -24,10 +24,10 @@ Before running this application, make sure you have the following installed on y
 - Java (JDK 11 or above)
 # Getting Started
 Follow these steps to run the application locally using Docker Compose.
-1. Clone the repository  
+**1. Clone the repository**  
 
         git clone https://github.com/SladjanaColakovic/timesheet-app.git
-2. Dockerize the application   
+**2. Dockerize the application**  
 
     This project uses Docker and Docker Compose for containerization.   
 
@@ -38,6 +38,6 @@ Follow these steps to run the application locally using Docker Compose.
     **Starting Containers if They Already Exist**   
     
         docker-compose start
-3. Access the Application   
+**3. Access the Application**   
 
     Once the containers are up and running, the Spring Boot application will be available at http://localhost:8080.
