@@ -29,8 +29,10 @@ Follow these steps to run the application locally using Docker Compose.
     https://github.com/SladjanaColakovic/timesheet-app.git
 2. Dockerize the application   
 
-    This project uses Docker and Docker Compose for containerization.
-    Use the following command to rebuild the images and start the containers:
+    This project uses Docker and Docker Compose for containerization.   
+
+    Use the following command to rebuild the images and start the containers:    
+    
     docker-compose up --build   
 
     **Starting Containers if They Already Exist**   
