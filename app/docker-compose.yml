@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Spring Boot Application
+  spring-boot-app:
+    build: .
+    container_name: spring-boot-app
+    ports:
+      - "8080:8080"  # Expose port 8080 for the Spring Boot app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/timesheet
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=12345
+    depends_on:
+      - postgres
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=timesheet
+    ports:
+      - "5432:5432"  # Expose port 5432 for PostgreSQL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
