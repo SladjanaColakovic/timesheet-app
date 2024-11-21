@@ -57,6 +57,10 @@ public class Employee {
     )
     private List<Project> projects;
 
+    public Employee(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
 
 }
