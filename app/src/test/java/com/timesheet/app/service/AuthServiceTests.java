@@ -1,5 +1,6 @@
 package com.timesheet.app.service;
 
+import com.timesheet.app.data.AuthServiceConstants;
 import com.timesheet.app.dto.auth.LoginRequest;
 import com.timesheet.app.exception.DuplicateUsernameException;
 import com.timesheet.app.model.Employee;
@@ -48,22 +49,12 @@ public class AuthServiceTests {
     @InjectMocks
     private AuthServiceImpl authService;
 
-
-   /* @BeforeEach
-    void setUp(){
-        Authentication authentication = mock(Authentication.class);
-        when(authenticationManager.authenticate(any())).thenReturn(authentication);
-        User user = mock(User.class);
-        when(userDetailsService.loadUserByUsername(any())).thenReturn(user);
-        when(tokenUtils.generateToken(any())).thenReturn("Test JWT token");
-    }*/
-
     @Test
     void testLogin_Successful(){
         setUpLoginSuccessful();
         String result = authService.login(new LoginRequest());
         assertThat(result).isNotNull();
-        assertThat(result).isEqualTo("Test JWT token");
+        assertThat(result).isEqualTo(AuthServiceConstants.JWT_TOKEN);
         verify(authenticationManager, times(1)).authenticate(any());
         verify(userDetailsService, times(1)).loadUserByUsername(any());
         verify(tokenUtils, times(1)).generateToken(any());
@@ -88,10 +79,10 @@ public class AuthServiceTests {
     void testRegister_Successful(){
         setUpRegister_Successful();
         Employee employee = new Employee();
-        employee.setPassword("Password123.");
+        employee.setPassword(AuthServiceConstants.PASSWORD);
         Employee result = authService.register(employee);
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Test User");
+        assertThat(result.getName()).isEqualTo(AuthServiceConstants.EMPLOYEE_NAME);
         verify(employeeRepository, times(1)).save(any());
     }
 
@@ -110,11 +101,11 @@ public class AuthServiceTests {
 
     private void setUpRegister_Successful(){
         when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.empty());
-        when(employeeRepository.save(any())).thenReturn(new Employee(1L, "Test User"));
+        when(employeeRepository.save(any())).thenReturn(new Employee(AuthServiceConstants.EMPLOYEE_ID, AuthServiceConstants.EMPLOYEE_NAME));
     }
 
     private void setUpRegister_Failure(){
-        when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.of(new Employee(1L, "Test User")));
+        when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.of(new Employee(AuthServiceConstants.EMPLOYEE_ID, AuthServiceConstants.EMPLOYEE_NAME)));
     }
 
     private void setUpLoginSuccessful(){
@@ -122,10 +113,10 @@ public class AuthServiceTests {
         when(authenticationManager.authenticate(any())).thenReturn(authentication);
         User user = mock(User.class);
         when(userDetailsService.loadUserByUsername(any())).thenReturn(user);
-        when(tokenUtils.generateToken(any())).thenReturn("Test JWT token");
+        when(tokenUtils.generateToken(any())).thenReturn(AuthServiceConstants.JWT_TOKEN);
     }
 
     private void setUpLoginFailure(){
-       when(authenticationManager.authenticate(any())).thenThrow(new BadCredentialsException("Failed"));
+       when(authenticationManager.authenticate(any())).thenThrow(new BadCredentialsException(AuthServiceConstants.BAD_CREDENTIALS_EXCEPTION_MESSAGE));
     }
 }
