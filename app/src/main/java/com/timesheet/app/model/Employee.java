@@ -62,5 +62,10 @@ public class Employee {
         this.name = name;
     }
 
+    public Employee(Long id, String name, List<Project> projects){
+        this(id, name);
+        this.projects = projects;
+    }
+
 
 }

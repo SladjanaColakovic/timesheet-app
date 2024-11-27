@@ -8,7 +8,6 @@ import com.timesheet.app.repository.EmployeeRepository;
 import com.timesheet.app.security.service.CustomUserDetailsService;
 import com.timesheet.app.security.token.TokenUtils;
 import com.timesheet.app.service.impl.AuthServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,9 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -77,7 +74,7 @@ public class AuthServiceTests {
 
     @Test
     void testRegister_Successful(){
-        setUpRegister_Successful();
+        setUpRegisterSuccessful();
         Employee employee = new Employee();
         employee.setPassword(AuthServiceConstants.PASSWORD);
         Employee result = authService.register(employee);
@@ -99,7 +96,7 @@ public class AuthServiceTests {
         }
     }
 
-    private void setUpRegister_Successful(){
+    private void setUpRegisterSuccessful(){
         when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.empty());
         when(employeeRepository.save(any())).thenReturn(new Employee(AuthServiceConstants.EMPLOYEE_ID, AuthServiceConstants.EMPLOYEE_NAME));
     }
