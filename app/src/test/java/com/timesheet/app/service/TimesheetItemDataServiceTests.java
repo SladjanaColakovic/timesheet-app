@@ -102,7 +102,7 @@ public class TimesheetItemDataServiceTests {
         setUpAddProjectToEmployeeFailure();
         Employee result = null;
         try {
-            service.addProjectToEmployee(new EmployeeProject());
+            result = service.addProjectToEmployee(new EmployeeProject());
         } catch (ProjectNotFoundException ex){
             assertThat(result).isNull();
             verify(employeeRepository, times(1)).findByIdAndDeletedFalse(any());
