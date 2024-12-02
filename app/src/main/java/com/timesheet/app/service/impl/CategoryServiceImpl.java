@@ -1,0 +1,46 @@
+package com.timesheet.app.service.impl;
+
+import com.timesheet.app.exception.CategoryNotFoundException;
+import com.timesheet.app.model.Category;
+import com.timesheet.app.repository.CategoryRepository;
+import com.timesheet.app.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CategoryServiceImpl implements CategoryService {
+
+    @Autowired
+    private CategoryRepository repository;
+
+    @Override
+    public Category create(Category category) {
+        return repository.save(category);
+    }
+
+    @Override
+    public List<Category> getAll() {
+        return repository.findByDeletedFalse();
+    }
+
+    @Override
+    public Category getById(Long id) {
+        return repository.findByIdAndDeletedFalse(id).orElseThrow(CategoryNotFoundException::new);
+    }
+
+    @Override
+    public Category update(Category category) {
+        Category existingCategory = repository.findByIdAndDeletedFalse(category.getId()).orElseThrow(CategoryNotFoundException::new);
+        existingCategory.setName(category.getName());
+        return repository.save(existingCategory);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Category category = repository.findByIdAndDeletedFalse(id).orElseThrow(CategoryNotFoundException::new);
+        category.setDeleted(true);
+        repository.save(category);
+    }
+}

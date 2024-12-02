@@ -11,13 +11,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Category {
+public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
+    private String address;
+    private String city;
+    private String postalCode;
+
+    @ManyToOne
+    private Country country;
 
     private boolean deleted = false;
 }

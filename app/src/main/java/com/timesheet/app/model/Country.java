@@ -1,17 +1,15 @@
 package com.timesheet.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class Category {
+@Entity
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
