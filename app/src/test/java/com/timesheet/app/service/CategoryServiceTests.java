@@ -93,7 +93,7 @@ public class CategoryServiceTests {
     }
 
     private void setUpTestsSuccessful(){
-        when(repository.findByIdAndDeletedFalse(any())).thenReturn(Optional.of(new Category(CategoryServiceConstants.CATEGORY_ID, CategoryServiceConstants.CATEGORY_NAME, false)));
+        when(repository.findByIdAndDeletedFalse(any())).thenReturn(Optional.of(CategoryServiceConstants.CATEGORY));
     }
 
     private void setUpTestsFailure(){
@@ -102,12 +102,12 @@ public class CategoryServiceTests {
 
     private void setUpTestUpdateSuccessful(){
         setUpTestsSuccessful();
-        when(repository.save(any())).thenReturn(new Category(CategoryServiceConstants.CATEGORY_ID, CategoryServiceConstants.CATEGORY_NAME_UPDATED, CategoryServiceConstants.IS_DELETED_FALSE));
+        when(repository.save(any())).thenReturn(CategoryServiceConstants.UPDATED_CATEGORY);
     }
 
     private void setUpTestDeleteSuccessful(){
         setUpTestsSuccessful();
-        when(repository.save(any())).thenReturn(new Category(CategoryServiceConstants.CATEGORY_ID, CategoryServiceConstants.CATEGORY_NAME, CategoryServiceConstants.IS_DELETED_TRUE));
+        when(repository.save(any())).thenReturn(CategoryServiceConstants.DELETED_CATEGORY);
     }
 
 }

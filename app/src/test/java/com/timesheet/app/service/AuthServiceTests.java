@@ -98,11 +98,11 @@ public class AuthServiceTests {
 
     private void setUpRegisterSuccessful(){
         when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.empty());
-        when(employeeRepository.save(any())).thenReturn(new Employee(AuthServiceConstants.EMPLOYEE_ID, AuthServiceConstants.EMPLOYEE_NAME));
+        when(employeeRepository.save(any())).thenReturn(AuthServiceConstants.EMPLOYEE);
     }
 
     private void setUpRegister_Failure(){
-        when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.of(new Employee(AuthServiceConstants.EMPLOYEE_ID, AuthServiceConstants.EMPLOYEE_NAME)));
+        when(employeeRepository.findByUsernameAndDeletedFalse(any())).thenReturn(Optional.of(AuthServiceConstants.EMPLOYEE));
     }
 
     private void setUpLoginSuccessful(){

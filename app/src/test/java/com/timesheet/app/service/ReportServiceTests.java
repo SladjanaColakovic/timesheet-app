@@ -2,12 +2,7 @@ package com.timesheet.app.service;
 
 import com.timesheet.app.data.ReportServiceConstants;
 import com.timesheet.app.helper.Report;
-import com.timesheet.app.helper.ReportItem;
 import com.timesheet.app.helper.ReportSearchParams;
-import com.timesheet.app.model.Category;
-import com.timesheet.app.model.Client;
-import com.timesheet.app.model.Employee;
-import com.timesheet.app.model.Project;
 import com.timesheet.app.repository.TimesheetItemRepository;
 import com.timesheet.app.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,10 +28,7 @@ public class ReportServiceTests {
 
     @BeforeEach
     public void setUp(){
-        when(timesheetItemRepository.getTimesheetReport(any())).thenReturn(Arrays.asList(
-                new ReportItem(ReportServiceConstants.DATE, new Employee(), new Project(), new Client(), new Category(), ReportServiceConstants.REPORT_ITEM_DESCRIPTION, ReportServiceConstants.TIME),
-                new ReportItem(ReportServiceConstants.DATE, new Employee(), new Project(), new Client(), new Category(), ReportServiceConstants.REPORT_ITEM_DESCRIPTION, ReportServiceConstants.TIME)
-        ));
+        when(timesheetItemRepository.getTimesheetReport(any())).thenReturn(ReportServiceConstants.REPORT_ITEMS);
     }
 
     @Test
