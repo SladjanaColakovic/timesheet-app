@@ -4,6 +4,7 @@ import com.timesheet.app.constants.AuthConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ import java.util.Date;
 
 @Component
 public class TokenUtils {
+
+    @Value("${jwt_secret_key}")
+    private String JWT_SECRET;
 
     public String generateToken(User user){
         return Jwts
@@ -69,7 +73,7 @@ public class TokenUtils {
     }
 
     private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(AuthConstants.JWT_SECRET));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(JWT_SECRET));
     }
 
     private Date createExpirationDate(){
