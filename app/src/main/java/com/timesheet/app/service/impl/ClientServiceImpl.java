@@ -1,10 +1,12 @@
 package com.timesheet.app.service.impl;
 
 import com.timesheet.app.exception.ClientNotFoundException;
+import com.timesheet.app.exception.OptimisticLockException;
 import com.timesheet.app.model.Client;
 import com.timesheet.app.repository.ClientRepository;
 import com.timesheet.app.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,13 +40,23 @@ public class ClientServiceImpl implements ClientService {
         existingClient.setCity(client.getCity());
         existingClient.setPostalCode(client.getPostalCode());
         existingClient.setCountry(client.getCountry());
-        return repository.save(existingClient);
+        Client result = null;
+        try{
+            result = repository.save(existingClient);
+        } catch (ObjectOptimisticLockingFailureException ex) {
+            throw new OptimisticLockException();
+        }
+        return result;
     }
 
     @Override
     public void delete(Long id) {
         Client client = repository.findByIdAndDeletedFalse(id).orElseThrow(ClientNotFoundException::new);
         client.setDeleted(true);
-        repository.save(client);
+        try{
+            repository.save(client);
+        } catch (ObjectOptimisticLockingFailureException ex){
+            throw new OptimisticLockException();
+        }
     }
 }

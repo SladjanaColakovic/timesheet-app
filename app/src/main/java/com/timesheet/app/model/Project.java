@@ -29,5 +29,18 @@ public class Project {
     @ManyToOne
     private Employee lead;
 
+    @Version
+    private Long version;
+
     private boolean deleted = false;
+
+    public Project(Long id, String name, String description, ProjectStatus status, Client client, Employee lead, boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.client = client;
+        this.lead = lead;
+        this.deleted = deleted;
+    }
 }

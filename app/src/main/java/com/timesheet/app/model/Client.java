@@ -26,5 +26,18 @@ public class Client {
     @ManyToOne
     private Country country;
 
+    @Version
+    private Long version;
+
     private boolean deleted = false;
+
+    public Client(Long id, String name, String address, String city, String postalCode, Country country, boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.deleted = deleted;
+    }
 }
