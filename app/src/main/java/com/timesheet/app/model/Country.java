@@ -17,5 +17,8 @@ public class Country {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @Version
+    private Long version;
+
     private boolean deleted = false;
 }

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +31,21 @@ public class Project {
     @ManyToOne
     private Employee lead;
 
+    @Version
+    private Long version;
+
     private boolean deleted = false;
+
+    @ManyToMany(mappedBy = "projects")
+    private List<Employee> employees;
+
+    public Project(Long id, String name, String description, ProjectStatus status, Client client, Employee lead, boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.client = client;
+        this.lead = lead;
+        this.deleted = deleted;
+    }
 }

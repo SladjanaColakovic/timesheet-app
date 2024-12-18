@@ -37,4 +37,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<?> duplicateUsernameException(){
         return new ResponseEntity<>("The username is already in use. Please try a different one.", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OptimisticLockException.class)
+    public ResponseEntity<?> optimisticLockException(){
+        return new ResponseEntity<>("Optimistic lock failure - the data has been modified by another transaction. Please reload and try again.", HttpStatus.BAD_REQUEST);
+    }
 }

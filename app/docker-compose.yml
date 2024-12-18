@@ -11,6 +11,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/timesheet
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=12345
+      - JWT_SECRET_KEY=Tx7ig1nHAZMldAMe+QdlIvs4+Ggos3oI+E1fmqspeacNWtZfItXRKnJ7Ms35tn2s7kbgmb5QXQaOx1Uj0KPLcQ
     depends_on:
       - postgres
 
