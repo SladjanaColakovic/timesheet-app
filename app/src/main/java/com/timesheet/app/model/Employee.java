@@ -43,13 +43,6 @@ public class Employee {
     )
     private Set<Role> roles;
 
-    /*@ManyToMany
-    @JoinTable(name = "employee_clients",
-            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id")
-    )
-    private List<Client> clients;*/
-
     @ManyToMany
     @JoinTable(name = "employee_projects",
             joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
