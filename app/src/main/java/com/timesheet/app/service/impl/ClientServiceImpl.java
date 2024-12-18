@@ -1,9 +1,12 @@
 package com.timesheet.app.service.impl;
 
 import com.timesheet.app.exception.ClientNotFoundException;
+import com.timesheet.app.exception.CountryNotFoundException;
 import com.timesheet.app.exception.OptimisticLockException;
 import com.timesheet.app.model.Client;
+import com.timesheet.app.model.Country;
 import com.timesheet.app.repository.ClientRepository;
+import com.timesheet.app.repository.CountryRepository;
 import com.timesheet.app.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -17,8 +20,13 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository repository;
 
+    @Autowired
+    private CountryRepository countryRepository;
+
     @Override
     public Client create(Client client) {
+        Country country = countryRepository.findByIdAndDeletedFalse(client.getCountry().getId()).orElseThrow(CountryNotFoundException::new);
+        client.setCountry(country);
         return repository.save(client);
     }
 
