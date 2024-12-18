@@ -1,10 +1,12 @@
 package com.timesheet.app.service.impl;
 
 import com.timesheet.app.exception.EmployeeNotFoundException;
+import com.timesheet.app.exception.OptimisticLockException;
 import com.timesheet.app.model.Employee;
 import com.timesheet.app.repository.EmployeeRepository;
 import com.timesheet.app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,13 +35,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setEmail(employee.getEmail());
         existingEmployee.setHoursPerWeek(employee.getHoursPerWeek());
         existingEmployee.setStatus(employee.getStatus());
-        return repository.save(existingEmployee);
+        Employee result = null;
+        try{
+            result = repository.save(existingEmployee);
+        } catch (ObjectOptimisticLockingFailureException ex) {
+            throw new OptimisticLockException();
+        }
+        return result;
     }
 
     @Override
     public void delete(Long id) {
         Employee employee = repository.findByIdAndDeletedFalse(id).orElseThrow(EmployeeNotFoundException::new);
         employee.setDeleted(true);
-        repository.save(employee);
+        try{
+            repository.save(employee);
+        } catch (ObjectOptimisticLockingFailureException ex){
+            throw new OptimisticLockException();
+        }
     }
 }

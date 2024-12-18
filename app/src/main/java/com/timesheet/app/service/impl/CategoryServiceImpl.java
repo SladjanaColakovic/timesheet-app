@@ -31,7 +31,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public Category getById(Long id) {
         return repository.findByIdAndDeletedFalse(id).orElseThrow(CategoryNotFoundException::new);
     }
@@ -45,7 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
         try{
             result = repository.save(existingCategory);
         } catch (ObjectOptimisticLockingFailureException ex) {
-            System.out.println("Exception");
             throw new OptimisticLockException();
         }
         return result;

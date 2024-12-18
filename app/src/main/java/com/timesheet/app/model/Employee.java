@@ -34,6 +34,9 @@ public class Employee {
 
     private EmployeeStatus status;
 
+    @Version
+    private Long version;
+
     private boolean deleted = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
