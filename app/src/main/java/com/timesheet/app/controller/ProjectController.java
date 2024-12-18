@@ -1,8 +1,10 @@
 package com.timesheet.app.controller;
 
+import com.timesheet.app.dto.employee.EmployeeDto;
 import com.timesheet.app.dto.project.NewProjectDto;
 import com.timesheet.app.dto.project.ProjectDto;
 import com.timesheet.app.dto.project.UpdateProjectDto;
+import com.timesheet.app.model.Employee;
 import com.timesheet.app.model.Project;
 import com.timesheet.app.service.ProjectService;
 import org.modelmapper.ModelMapper;
@@ -62,5 +64,15 @@ public class ProjectController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         service.delete(id);
         return new ResponseEntity<>("The project has been deleted", HttpStatus.OK);
+    }
+
+    @GetMapping("/employees/{projectId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getEmployeesForProject(@PathVariable Long projectId){
+        List<Employee> result = service.getEmployeesForProject(projectId);
+        return new ResponseEntity<>(
+                result.stream().map(element -> mapper.map(element, EmployeeDto.class)),
+                HttpStatus.OK
+        );
     }
 }

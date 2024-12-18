@@ -36,7 +36,7 @@ public class TimesheetItemDataController {
 
     @PostMapping("/add/project")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addClientToEmployee(@RequestBody EmployeeProject employeeProject){
+    public ResponseEntity<?> addProjectToEmployee(@RequestBody EmployeeProject employeeProject){
         Employee result = service.addProjectToEmployee(employeeProject);
         return new ResponseEntity<>(mapper.map(result, EmployeeDto.class), HttpStatus.OK);
     }
